@@ -1,0 +1,49 @@
+doctype html
+html(ng-app="TFeed")
+  head
+    title !{title}
+    meta(charset="utf-8")
+    meta(name="description", content="#{title}")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="author", content="tokune")
+    link(rel="icon", href="/favicon.ico", type="image/x-icon")
+    link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+    link(rel="stylesheet", href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css")
+    link(href='http://fonts.googleapis.com/css?family=Permanent+Marker', rel='stylesheet', type='text/css')
+    link(rel="stylesheet", href="/css/main.css")
+    block head
+  body
+    #title.container !{title}
+    .rss-nav.container-fluid
+      nav.navbar.navbar-default(role="navigation")
+        .container-fluid
+          ul.nav.navbar-nav
+            li 
+              a(href="#") +
+            li
+              a(href="#/site") site
+              .nav-sites
+                ul
+          ul.nav.navbar-nav.navbar-right.hidden
+            li
+              a(href="#") login
+    .rss-nav-fixed.hidden
+      nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
+        ul.nav.navbar-nav
+          li 
+            a(href="#") +
+          li
+            a(href="#/site") site
+            .nav-sites
+                ul
+        ul.nav.navbar-nav.navbar-right.hidden
+          li
+            a(href="#") login
+    .container
+      block body
+  script(src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js")
+  script(src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js")
+  script(src="http://cdn.staticfile.org/angular.js/1.2.18/angular.min.js")
+  script(src="http://cdn.staticfile.org/angular.js/1.2.18/angular-route.js")
+  block script

@@ -1,0 +1,98 @@
+extends layout
+
+block body
+  #rss-body.content(ng-view)
+
+block script
+  script.
+    var app = angular.module('TFeed', ['ngRoute']);
+    
+    app.config(function($routeProvider){
+      $routeProvider
+        .when('/site',
+        {   
+          controller: 'TSCtrl',
+          templateUrl: '/site'
+        })  
+        .when('/feed/:siteID',
+        {   
+          controller: 'TFCtrl',
+          templateUrl: '/feed'
+        })  
+        .otherwise({ redirectTo: '/site' })
+    });
+    
+    app.controller('TSCtrl', function ($scope, tokuneService) {
+        $scope.sites = tokuneService.getSites();
+        tokuneService.updaeNavSites(); 
+    });
+    
+    app.controller('TFCtrl', function ($scope, $sce, $routeParams, $q, tokuneService) {
+        var siteID = ($routeParams.siteID) ? parseInt($routeParams.siteID) : '';
+        var tfDate = {};
+        var page = 1;
+        tokuneService.updaeNavSites(); 
+    
+        tokuneService.getFeeds(siteID).then(
+          function(data) {
+            $scope.feeds = data;
+          },function() {
+            $scope.feeds = undefined;
+          }
+        );
+    
+        $scope.getHTML = function(content){
+          var html = $sce.trustAsHtml(content);
+          return html;
+        }
+        $scope.add = function(callback){
+          page++;
+          tokuneService.getFeeds(siteID, page).then(
+            function(data) {
+              for(var i=0;i<data.length;i++) {
+                $scope.feeds.push(data[i]);
+                callback();
+              }
+            },callback
+          );
+        }
+    });
+    
+    app.service('tokuneService', function ($q) {
+        var sites = !{JSON.stringify(sites)};
+        this.getSites = function() {
+            return sites;
+        }
+        this.getFeeds = function(siteID, page) {
+          var deferred = $q.defer();
+          var link = "/data/site/";
+          link = siteID ? link + siteID : link;
+          link = page ? link + '?page=' + page: link;
+          $.ajax({ 
+            url:  link, 
+            dataType: "json", 
+            success: function(data) { 
+              if (data.err)
+                deferred.reject();
+              else
+                deferred.resolve(data);
+            }, 
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+              deferred.reject();
+            } 
+          });
+          return deferred.promise;
+        }
+        this.updaeNavSites = function(){
+          if($('.nav-sites ul li').length > 0) return false;
+          for (var i = 0; i < sites.length; i++) {
+              var a_element = document.createElement('a');
+              var li_element = document.createElement('li');
+              a_element.setAttribute('href', '#/feed/' + sites[i].site_id);
+              li_element.appendChild(document.createTextNode(sites[i].title));
+              a_element.appendChild(li_element); 
+              $('.nav-sites ul').append(a_element);
+          };
+        }
+    });
+  script(src='/js/main.js')

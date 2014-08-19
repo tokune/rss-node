@@ -1,0 +1,9 @@
+.feeds 
+  h3 {{site}}
+  .feed.container-fluid.unselect(id="feed{{feed.site_id}}-{{feed.feed_id}}", ng-repeat="feed in feeds")
+    a(href="{{feed.link}}", target="blank")
+      h3 {{feed.title}}
+    p.dt • {{feed.created_at | date:'yyyy/MM/dd/ h:mma'}}
+    p.feed-content(ng-bind-html="getHTML(feed.content)")
+    .blank
+.loading.hidden loading

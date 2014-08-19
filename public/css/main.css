@@ -1,0 +1,99 @@
+body {
+    margin-bottom:100px;
+    background: #e2e2e2;
+}
+.loading, #title {
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+}
+#title {
+    font-size: 64px;
+}
+.hidden {
+    display: hidden;
+}
+.loading {
+    background: #fff;
+    font-size: 30px;
+}
+.rss-nav-fixed ul {
+    margin-left: 31px;
+}
+.rss-nav-fixed ul.nav.navbar-nav.navbar-right {
+    margin-right: 16px;
+}
+.feeds .feed {
+    background: #fff;
+    border-bottom:1px solid #efefef;
+}
+.feeds .feed:first-of-type {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.feeds .unselect .feed-content {
+    max-height: 250px;
+    overflow: hidden;
+}
+.feed .blank {
+    height: 10px;
+}
+.feeds .active {
+    border-left: 10px solid #1E90FF;
+}
+.feeds img {
+    max-width: 100%;
+}
+.rss-nav nav ul li,
+.rss-nav-fixed nav ul li {
+    position: relative;
+}
+.rss-nav nav ul li .nav-sites,
+.rss-nav-fixed nav ul li .nav-sites {
+    position: absolute;
+    top: 50px;
+    padding: 10px;
+    border: 2px solid #999;
+    border-radius: 8px;
+    display: none;
+}
+.rss-nav nav ul li:hover .nav-sites,
+.rss-nav-fixed nav ul li:hover .nav-sites {
+    display: block;
+}
+.rss-nav nav ul li .nav-sites ul a li,
+.rss-nav-fixed nav ul li .nav-sites ul a li {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width:  100px;
+    height:  20px;
+}
+.rss-nav nav ul li .nav-sites ul,
+.rss-nav-fixed nav ul li .nav-sites ul {
+    padding: 0;
+    margin: 0;
+}
+.sites .site {
+    width: 265px;
+    height: 55px;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    text-align: center;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 2px;
+}
+.sites .site:hover {
+    background: #428bca;
+}
+.sites .site .title {
+    line-height: 38px;
+}
+.sites .site:hover .title {
+    color: #fff;
+}
+.sites .site a:hover {
+    color: #428bca;
+    text-decoration: none;
+}
